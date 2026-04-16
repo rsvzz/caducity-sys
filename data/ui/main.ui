@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.3 -->
+<interface>
+  <!-- interface-name syssgcaducity.ui -->
+  <requires lib="gtk" version="4.14"/>
+  <requires lib="libadwaita" version="1.5"/>
+  <object class="AdwApplicationWindow" id="adw_app">
+    <property name="content">
+      <object class="AdwNavigationSplitView" id="nav_splitview">
+        <property name="content">
+          <object class="AdwNavigationPage" id="nav_page_content"/>
+        </property>
+        <property name="max-sidebar-width">180.0</property>
+        <property name="min-sidebar-width">100.0</property>
+        <property name="sidebar">
+          <object class="AdwNavigationPage" id="nav_page_tittle">
+            <property name="child">
+              <object class="AdwToolbarView" id="toolbar_tittle">
+                <property name="content">
+                  <object class="GtkListView" id="list_option_view">
+                    <property name="orientation">vertical</property>
+                  </object>
+                </property>
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="title-widget">
+                      <object class="GtkLabel">
+                        <property name="label">SG Caducity</property>
+                        <accessibility>
+                          <property name="value-max">-0.4</property>
+                        </accessibility>
+                      </object>
+                    </property>
+                    <child type="end">
+                      <object class="GtkMenuButton" id="menu_option">
+                        <property name="icon-name">open-menu-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+            <property name="title">Tab</property>
+          </object>
+        </property>
+        <property name="sidebar-width-unit">px</property>
+      </object>
+    </property>
+    <property name="height-request">720</property>
+    <property name="width-request">1280</property>
+  </object>
+</interface>
