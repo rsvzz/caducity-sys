@@ -16,7 +16,7 @@ use view::{CategoryPG, HomePG, ProductPG, UpdateViewExt};
 fn main() {
     //let _ = gtk::init(); //need CssProvider
     let app: Application = Application::builder()
-        .application_id("io.github.name.newapp")
+        .application_id("io.github.rsvzz.caducity-sys")
         .build();
 
     let path = env::current_exe().expect("No path exe");
