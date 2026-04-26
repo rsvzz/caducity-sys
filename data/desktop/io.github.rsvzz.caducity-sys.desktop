@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Caducity-SYS
+Comment=Caducity-SYS allows you to organize products by expiration date to keep track of them.
+Exec=caducity
+Icon=io.github.rsvzz.caducity-sys
+Terminal=false
+Type=Application
+Categories=Development;
+StartupNotify=true

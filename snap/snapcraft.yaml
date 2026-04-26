@@ -30,7 +30,7 @@ parts:
 
    caducity-sys:
     plugin: meson
-    source: https://github.com/rsvzz/caducity-sys/releases/download/${CRAFT_PROJECT_VERSION}/caducity-sys_all.tar.xz
+    source: . #https://github.com/rsvzz/caducity-sys/releases/download/${CRAFT_PROJECT_VERSION}/caducity-sys_all.tar.xz
     meson-parameters:
       - --prefix=/
       - --buildtype=release
@@ -42,8 +42,7 @@ parts:
       - meson
       - rustc-1.91
       - cargo-1.91
-    stage-packages:
-      - adwaita-icon-theme
+      - libsqlite3-dev
     override-pull: | 
       snapcraftctl pull 
       cp -rv ${CRAFT_PART_SRC}/vendor ${CRAFT_PART_BUILD}/vendor

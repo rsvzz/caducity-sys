@@ -6,3 +6,4 @@
 *.db
 /.cargo
 /vendor
+/.vscode
