@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 1.0 -->
+<interface>
+  <!-- interface-name category.ui -->
+  <requires lib="gtk" version="4.14"/>
+  <requires lib="libadwaita" version="1.5"/>
+  <object class="AdwToolbarView" id="tool_view">
+    <property name="content">
+      <object class="GtkBox">
+        <property name="hexpand">True</property>
+        <property name="spacing">5</property>
+        <property name="vexpand">True</property>
+        <child>
+          <object class="GtkRevealer" id="rev_add">
+            <property name="child">
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwEntryRow" id="et_id">
+                        <property name="editable">False</property>
+                        <property name="focus-on-click">False</property>
+                        <property name="focusable">False</property>
+                        <property name="max-length">15</property>
+                        <property name="sensitive">False</property>
+                        <property name="title">Id:</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwEntryRow" id="et_inv_id">
+                        <property name="editable">False</property>
+                        <property name="focus-on-click">False</property>
+                        <property name="focusable">False</property>
+                        <property name="max-length">15</property>
+                        <property name="sensitive">False</property>
+                        <property name="title">Inventory:</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwEntryRow" id="et_barcode">
+                        <property name="max-length">15</property>
+                        <property name="title">barcode:</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwEntryRow" id="et_stock">
+                        <property name="max-length">6</property>
+                        <property name="title">Stock:</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwComboRow" id="cb_status">
+                        <property name="model">
+                          <object class="GtkStringList" id="model_status_product">
+                            <items>
+                              <item>End Life</item>
+                              <item>Other</item>
+                            </items>
+                          </object>
+                        </property>
+                        <property name="title">Status:</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwComboRow" id="cb_box">
+                        <property name="model">
+                          <object class="GtkStringList" id="model_box_status">
+                            <items>
+                              <item>Packages</item>
+                              <item>Unit</item>
+                            </items>
+                          </object>
+                        </property>
+                        <property name="title">Boxes:</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="halign">start</property>
+                    <property name="label">Date Caducity:</property>
+                    <property name="margin-bottom">5</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-top">5</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCalendar" id="c_date_caducity"/>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="halign">end</property>
+                    <property name="margin-top">5</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkButton" id="btn_cancel">
+                        <property name="icon-name">edit-delete-symbolic</property>
+                        <property name="margin-end">70</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_save">
+                        <property name="halign">end</property>
+                        <property name="icon-name">document-save-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+            <property name="transition-type">slide-left</property>
+            <property name="vexpand">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="child">
+              <object class="GtkColumnView" id="view_list">
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+              </object>
+            </property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+          </object>
+        </child>
+      </object>
+    </property>
+    <child type="top">
+      <object class="AdwHeaderBar">
+        <property name="title-widget">
+          <object class="GtkLabel" id="lbl_title">
+            <property name="justify">center</property>
+            <property name="label">Detail Invantory</property>
+          </object>
+        </property>
+        <child type="start">
+          <object class="GtkButton" id="btn_show_add">
+            <property name="icon-name">list-add-symbolic</property>
+          </object>
+        </child>
+        <child type="start">
+          <object class="GtkButton" id="btn_edit">
+            <property name="icon-name">document-edit-symbolic</property>
+          </object>
+        </child>
+        <child type="start">
+          <object class="GtkButton" id="btn_delete">
+            <property name="icon-name">user-trash-symbolic</property>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkButton" id="btn_print">
+            <property name="icon-name">printer-symbolic</property>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkButton" id="btn_refresh">
+            <property name="icon-name">view-refresh-symbolic</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

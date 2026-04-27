@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 1.0 -->
+<interface>
+  <!-- interface-name category.ui -->
+  <requires lib="gtk" version="4.14"/>
+  <requires lib="libadwaita" version="1.5"/>
+  <object class="AdwNavigationView" id="nav_view">
+    <child>
+      <object class="AdwNavigationPage">
+        <property name="child">
+          <object class="AdwToolbarView">
+            <property name="content">
+              <object class="GtkBox">
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="child">
+                      <object class="GtkColumnView" id="view_list">
+                        <property name="halign">start</property>
+                        <property name="valign">start</property>
+                      </object>
+                    </property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                  </object>
+                </child>
+              </object>
+            </property>
+            <child type="top">
+              <object class="AdwHeaderBar">
+                <property name="title-widget">
+                  <object class="GtkLabel">
+                    <property name="justify">center</property>
+                    <property name="label">Inventories</property>
+                  </object>
+                </property>
+                <child type="start">
+                  <object class="GtkButton" id="btn_show_add">
+                    <property name="icon-name">document-new-symbolic</property>
+                    <property name="tooltip-text">New inventory</property>
+                  </object>
+                </child>
+                <child type="start">
+                  <object class="GtkButton" id="btn_add_list">
+                    <property name="icon-name">address-book-new-symbolic</property>
+                    <property name="tooltip-text">Add item for inventory</property>
+                  </object>
+                </child>
+                <child type="start">
+                  <object class="GtkButton" id="btn_closed">
+                    <property name="icon-name">changes-prevent-symbolic</property>
+                    <property name="tooltip-text">Closed inventory</property>
+                  </object>
+                </child>
+                <child type="end">
+                  <object class="GtkButton" id="btn_report">
+                    <property name="icon-name">document-print-symbolic</property>
+                    <property name="tooltip-text">View Report</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+        <property name="title">page_toolkit_home</property>
+      </object>
+    </child>
+    <child>
+      <object class="AdwNavigationPage" id="page_content">
+        <property name="title">page_content_home</property>
+      </object>
+    </child>
+  </object>
+</interface>

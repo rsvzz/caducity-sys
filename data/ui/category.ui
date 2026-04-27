@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.3 -->
+<interface>
+  <!-- interface-name category.ui -->
+  <requires lib="gtk" version="4.14"/>
+  <requires lib="libadwaita" version="1.5"/>
+  <object class="AdwToolbarView" id="tool_view">
+    <property name="content">
+      <object class="GtkBox">
+        <property name="hexpand">True</property>
+        <property name="spacing">5</property>
+        <property name="vexpand">True</property>
+        <child>
+          <object class="GtkRevealer" id="rev_add">
+            <property name="transition-type">slide-left</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwEntryRow" id="et_cateid">
+                        <property name="sensitive">False</property>
+                        <property name="title">Id:</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwEntryRow" id="et_name">
+                        <property name="max-length">50</property>
+                        <property name="title">Name:</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwEntryRow" id="et_description">
+                        <property name="max-length">150</property>
+                        <property name="title">Description:</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkButton" id="btn_cancel">
+                        <property name="icon-name">edit-delete-symbolic</property>
+                        <property name="margin-end">70</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_save">
+                        <property name="halign">end</property>
+                        <property name="icon-name">document-save-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="child">
+              <object class="GtkColumnView" id="view_list">
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+              </object>
+            </property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+          </object>
+        </child>
+      </object>
+    </property>
+    <child type="top">
+      <object class="AdwHeaderBar">
+        <property name="title-widget">
+          <object class="GtkLabel">
+            <property name="justify">center</property>
+            <property name="label">Categories</property>
+          </object>
+        </property>
+        <child type="start">
+          <object class="GtkButton" id="btn_show_add">
+            <property name="icon-name">list-add-symbolic</property>
+          </object>
+        </child>
+        <child type="start">
+          <object class="GtkButton" id="btn_edit">
+            <property name="icon-name">document-edit-symbolic</property>
+          </object>
+        </child>
+        <child type="start">
+          <object class="GtkButton" id="btn_delete">
+            <property name="icon-name">user-trash-symbolic</property>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkButton" id="btn_del">
+            <property name="icon-name">printer-symbolic</property>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkButton" id="btn_refresh">
+            <property name="icon-name">view-refresh-symbolic</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
