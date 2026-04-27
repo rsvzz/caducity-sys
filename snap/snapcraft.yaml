@@ -30,7 +30,7 @@ parts:
 
    caducity-sys:
     plugin: meson
-    source: . #https://github.com/rsvzz/caducity-sys/releases/download/${CRAFT_PROJECT_VERSION}/caducity-sys_all.tar.xz
+    source: https://github.com/rsvzz/caducity-sys/releases/download/${CRAFT_PROJECT_VERSION}/caducity-sys_all.tar.xz
     meson-parameters:
       - --prefix=/
       - --buildtype=release
