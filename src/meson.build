@@ -7,7 +7,7 @@ sqlite_dep = dependency('sqlite3', required: true, version: '>=3.45')
 cargo = find_program('cargo', required: true)
 
 #install_data('../data/metainfo/io.github.rsvzz.caducity-sys.metainfo.xml', install_dir: get_option('prefix') / 'share/metainfo')
-#install_data('../data/icons/io.github.rsvzz.caducity-sys.svg', install_dir: get_option('prefix') / 'share/icons/hicolor/scalable/apps')
+install_data('../data/icons/io.github.rsvzz.caducity-sys.svg', install_dir: get_option('prefix') / 'share/icons/hicolor/scalable/apps')
 install_data('../data/desktop/io.github.rsvzz.caducity-sys.desktop', install_dir: get_option('prefix') /'share/applications')
 
 icons_file = files(
