@@ -14,7 +14,7 @@ platforms:
   armhf:
 
 apps:
-  icon-browser-adw:
+  caducity-sys:
     command: bin/caducity
     desktop: share/applications/io.github.rsvzz.caducity-sys.desktop
     extensions: [gnome]
