@@ -17,8 +17,8 @@ apps:
   caducity-sys:
     command: bin/caducity
     desktop: share/applications/io.github.rsvzz.caducity-sys.desktop
+    common-id: io.github.rsvzz.caducity_sys # - nop 
     extensions: [gnome]
-    common-id: io.github.rsvzz.caducity-sys
     slots: [caducity-sys-dbus]
     plugs:
       - desktop
@@ -36,8 +36,8 @@ parts:
       - --buildtype=release
       - --native-file=${CRAFT_PART_SRC}/data/build-aux/native.ini
     build-environment:
-      - C_INCLUDE_PATH: ${SNAPCRAFT_STAGE}/include
-      - LIBRARY_PATH: ${SNAPCRAFT_STAGE}/lib/x86_64-linux-gnu
+      - C_INCLUDE_PATH: ${CRAFT_STAGE}/include
+      - LIBRARY_PATH: ${CRAFT_STAGE}/lib/x86_64-linux-gnu
     build-packages:
       - meson
       - rustc-1.91
@@ -56,4 +56,4 @@ slots:
   caducity-sys-dbus:
     interface: dbus
     bus: session
-    name: io.github.rsvzz.caducity-sys
+    name: io.github.rsvzz.caducity_sys

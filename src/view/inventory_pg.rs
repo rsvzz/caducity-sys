@@ -10,7 +10,7 @@ use gtk::gio::ListStore;
 use gtk::glib::{self, Date, DateDay, DateMonth, DateTime, DateYear, TimeZone};
 use gtk::{
     Builder, Button, Calendar, ColumnView, ColumnViewColumn, Label, Revealer,
-    SignalListItemFactory, SingleSelection,
+    SignalListItemFactory, SingleSelection, FileDialog,
 };
 use rsqlite::Connection;
 
@@ -41,6 +41,7 @@ impl InventoryPG {
         let _build: Builder = ui.get_new_ui().build; //new builder
         let _tool_view: ToolbarView = _build.object("tool_view").unwrap();
         let btn_add: Button = _build.object("btn_show_add").unwrap();
+        //let btn_report: Button = _build.object("btn_report").unwrap();
         let column_view: ColumnView = _build.object("view_list").unwrap();
         let _rev_add: Revealer = _build.object("rev_add").unwrap();
         let _et_id: EntryRow = _build.object("et_id").unwrap();
@@ -667,7 +668,7 @@ impl UpdateViewExt for InventoryPG {
         let col_stock = ColumnViewColumn::new(Some("Stock"), Some(factory_stock));
         let col_status = ColumnViewColumn::new(Some("Status"), Some(factory_status));
         let col_box = ColumnViewColumn::new(Some("Boxes"), Some(factory_box));
-        let col_date = ColumnViewColumn::new(Some("Date"), Some(factory_date));
+        let col_date = ColumnViewColumn::new(Some("Expiration Date"), Some(factory_date));
         let col_date_created = ColumnViewColumn::new(Some("Date Created"), Some(factory_created));
         let col_date_updated = ColumnViewColumn::new(Some("Date Updated"), Some(factory_updated));
 
@@ -681,7 +682,7 @@ impl UpdateViewExt for InventoryPG {
         col_box.set_resizable(true);
         col_box.set_expand(true);
 
-        col_date.set_fixed_width(80);
+        col_date.set_fixed_width(90);
         col_date.set_resizable(true);
         col_date.set_expand(true);
 

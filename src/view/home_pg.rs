@@ -1,6 +1,7 @@
 use crate::data::{CategoryLite, InventoryDetLite, InventoryLite, ProductLite};
 use crate::model::{
-    CreateLiteExt, DataConext, ItemHome, LoadUI, QueryContext, QueryValidExtContext,
+    CreateLiteExt, DataConext, ItemHome, LoadUI, QueryContext, QueryFilterContext,
+    QueryValidExtContext,
 };
 use crate::view::{DialogAlert, InventoryPG, UpdateViewExt};
 use adw::prelude::{AdwDialogExt, NavigationPageExt};
@@ -8,8 +9,8 @@ use adw::{ApplicationWindow, NavigationPage, NavigationView};
 use gtk::gio::ListStore;
 use gtk::glib::DateTime;
 use gtk::{
-    Builder, Button, ColumnView, ColumnViewColumn, Label, SignalListItemFactory, SingleSelection,
-    prelude::*,
+    Builder, Button, ColumnView, ColumnViewColumn, FileDialog, FileFilter, Label,
+    SignalListItemFactory, SingleSelection, prelude::*,
 };
 use gtk::{Image, glib};
 use rsqlite::Connection;
@@ -30,7 +31,7 @@ pub struct HomePG {
 impl HomePG {
     pub fn new(ui: &LoadUI, db: &str, inv_ui: &LoadUI, win: &ApplicationWindow) -> Self {
         let window = win.clone();
-        
+
         let ctx_cate: &dyn DataConext<Output = Connection, Error = rsqlite::Error> =
             &CategoryLite::empty();
         let ctx_prod: &dyn DataConext<Output = Connection, Error = rsqlite::Error> =
@@ -50,8 +51,59 @@ impl HomePG {
         let btn_add: Button = _build.object("btn_show_add").unwrap();
         let btn_add_list: Button = _build.object("btn_add_list").unwrap();
         let btn_closed: Button = _build.object("btn_closed").unwrap();
+        let btn_report: Button = _build.object("btn_report").unwrap();
+        let db_cp = db.to_string();
 
         let column_view: ColumnView = _build.object("view_list").unwrap();
+
+        btn_report.connect_clicked(glib::clone!(
+            #[weak]
+            window,
+            #[weak]
+            column_view,
+            move |_| {
+                if let Some(select) = column_view.model().and_downcast::<SingleSelection>() {
+                    if let Some(item) = select.item(select.selected()).and_downcast::<ItemHome>() {
+                        let dialog = FileDialog::new();
+                        let filter = gtk::FileFilter::new();
+                        filter.add_suffix("pdf");
+                        filter.set_name(Some("Archivos PDF"));
+
+                        let store = ListStore::builder()
+                            .item_type(FileFilter::static_type())
+                            .build();
+
+                        store.append(&filter);
+                        dialog.set_filters(Some(&store));
+                        let _db_cp = db_cp.to_string();
+
+                        dialog.save(Some(&window), None::<&gtk::gio::Cancellable>, move |res| {
+                            match res {
+                                Ok(file) => {
+                                    if let Some(path) = file.path() {
+                                        let mut obj_inv = InventoryDetLite::empty();
+                                        obj_inv.inv_id = item.id(); // filter por id_inv Id Inventory
+                                        let query: &dyn QueryFilterContext<
+                                            Output = Option<Vec<InventoryDetLite>>,
+                                        > = &obj_inv;
+
+                                        if let Some(items) = query.get_filter(&_db_cp) {
+                                            println!(
+                                                "Carpeta seleccionada: {:?} Items: {:?}",
+                                                path,
+                                                items.iter().count()
+                                            );
+                                        }
+                                    }
+                                }
+                                Err(err) => eprintln!("Error: {:?}", err),
+                            }
+                        });
+                    }
+                }
+            }
+        ));
+
         //let model_status_inv: StringList = _build.object("model_status_inv").unwrap();
         let page: NavigationPage = _build.object("page_content").unwrap();
 
@@ -95,9 +147,13 @@ impl UpdateViewExt for HomePG {
                     if let Some(obj) = select_cp.selected_item() {
                         if let Ok(item) = obj.downcast::<ItemHome>() {
                             let alert = DialogAlert::new("What do you do?", "");
+                            let mut is_show = false;
                             alert.set_remove_response("cancel");
                             match item.statusid() {
-                                0 => alert.set_body("status closed dont change this"),
+                                0 => {
+                                    alert.set_body("status closed dont change this");
+                                    is_show = true;
+                                }
                                 1 => {
                                     if let Some(root) = nav_view_cp.root() {
                                         if let Some(parent) =
@@ -118,10 +174,14 @@ impl UpdateViewExt for HomePG {
                                         }
                                     }
                                 }
-                                _ => alert.set_body("this option dont found"),
+                                _ => {
+                                    alert.set_body("this option dont found");
+                                    is_show = true;
+                                }
                             }
-
-                            alert.dialog.present(Some(&win));
+                            if is_show {
+                                alert.dialog.present(Some(&win));
+                            }
                         }
                     }
                 }

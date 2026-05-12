@@ -16,7 +16,7 @@ use view::{CategoryPG, HomePG, ProductPG, UpdateViewExt};
 fn main() {
     //let _ = gtk::init(); //need CssProvider
     let app: Application = Application::builder()
-        .application_id("io.github.rsvzz.caducity-sys")
+        .application_id("io.github.rsvzz.caducity_sys")
         .build();
 
     let path = env::current_exe().expect("No path exe");
@@ -61,10 +61,10 @@ fn main() {
                 .unwrap_or_else(|_| format!("{}/.local/share", env::var("HOME").unwrap()));
 
             let app_dir = format!("{}/caducity-sys", data_home);
-            std::fs::create_dir_all(&app_dir).expect("No se pudo crear el directorio");
+            std::fs::create_dir_all(&app_dir).expect("dont create directory");
 
             let db_path = format!("{}/caducity.sqlite3", app_dir);
-            println!("{}", db_path);
+            //println!("{}", db_path);
             let pg_category = CategoryPG::new(&cate, &db_path, &window);
             let pg_product = ProductPG::new(&product, &db_path, &window);
             let pg_home = HomePG::new(&home, &db_path, &inventory, &window);
